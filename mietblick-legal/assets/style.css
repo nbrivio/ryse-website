@@ -1,0 +1,230 @@
+:root {
+  --accent: #C5FF28;
+  --radius: 18px;
+  --radius-sm: 12px;
+  --measure: 34rem;
+  --bg: #F7FBFF;
+  --surface: #FFFFFF;
+  --ink: #1B3639;
+  --ink-2: #4A6063;
+  --ink-faint: #62787A;
+  --outline: #E1E5E8;
+  --separator: #EEF1F2;
+  --hero: #1B3639;
+  --hero-ink: #F7FBFF;
+  --link: #1B3639;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+  --bg: #0A1719;
+  --surface: #16302F;
+  --ink: #F7FBFF;
+  --ink-2: #A9BDBF;
+  --ink-faint: #829799;
+  --outline: rgba(255,255,255,.14);
+  --separator: rgba(255,255,255,.10);
+  --hero: #244B50;
+  --hero-ink: #F7FBFF;
+  --link: #F7FBFF;
+  }
+}
+
+/* Struktur-Stylesheet für die Rechtstexte-Seiten.
+   Enthält keine Farbwerte: die stehen als Tokens in site.json und werden vom
+   Generator als :root-Block davorgesetzt. So teilen mietblick und Ryse dieselbe
+   Struktur, ohne dass eine Seite nach der anderen aussieht. */
+
+/* TOKENS werden vom Generator davor gesetzt. */
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 1rem/1.62 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-feature-settings: "kern";
+  text-rendering: optimizeLegibility;
+}
+
+/* Keyboard users reach the text without walking the whole document list. */
+.skip {
+  position: absolute; left: -9999px;
+  background: var(--lime); color: var(--petrol);
+  padding: 12px 18px; border-radius: 0 0 var(--radius-sm) 0;
+  font-weight: 650; z-index: 10;
+}
+.skip:focus { left: 0; top: 0; }
+
+:focus-visible {
+  outline: 3px solid var(--lime);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.wrap { max-width: var(--measure); margin: 0 auto; padding: 0 20px 72px; }
+
+/* --- Kopf --- */
+
+header.top {
+  background: var(--hero); color: var(--hero-ink);
+  padding: 28px 0 26px;
+  margin-bottom: 28px;
+}
+header.top .wrap { padding-bottom: 0; }
+.brand {
+  display: inline-block; text-decoration: none;
+  color: var(--hero-ink);
+  font-size: 1.5rem; font-weight: 700; letter-spacing: -.02em;
+}
+.brand .dot { color: var(--lime); }
+.brand:hover { text-decoration: none; }
+.tagline { margin: 6px 0 0; color: var(--ice); opacity: .82; font-size: .95rem; }
+
+nav.back { margin: 0 0 22px; }
+nav.back a {
+  display: inline-flex; align-items: center; gap: 7px;
+  min-height: 44px;
+  color: var(--ink-2); text-decoration: none; font-size: .94rem; font-weight: 550;
+}
+nav.back a:hover { color: var(--ink); }
+
+/* --- Text --- */
+
+main h1 {
+  font-size: 1.95rem; line-height: 1.2; letter-spacing: -.022em;
+  margin: 0 0 6px; font-weight: 700;
+}
+main h2 {
+  font-size: 1.18rem; line-height: 1.32; letter-spacing: -.01em;
+  margin: 2.1em 0 .5em; font-weight: 650;
+}
+main h2:first-of-type { margin-top: 1.4em; }
+p { margin: 0 0 1em; }
+a { color: var(--link); text-decoration-color: var(--ink-faint); text-underline-offset: .18em; }
+a:hover { text-decoration-color: var(--ink); }
+strong { font-weight: 650; }
+
+.stamp {
+  display: inline-block;
+  margin: 0 0 1.6em;
+  padding: 5px 11px;
+  border: 1px solid var(--outline); border-radius: 999px;
+  color: var(--ink-2); font-size: .82rem; font-weight: 550;
+}
+
+ul { margin: 0 0 1.15em; padding: 0; list-style: none; }
+ul li {
+  position: relative; padding-left: 1.15em; margin-bottom: .5em;
+}
+ul li::before {
+  content: ""; position: absolute; left: 0; top: .66em;
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--lime);
+  /* Lime on white is 1.4:1 — decorative only. The indent carries the structure,
+     and a screen reader gets a real <ul>. */
+}
+
+/* --- Karten --- */
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--outline);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  margin: 0 0 1.4em;
+}
+.card p:last-child, .card ul:last-child { margin-bottom: 0; }
+.card .name { font-weight: 650; margin-bottom: .35em; }
+.card .meta { color: var(--ink-2); font-size: .93rem; margin: 0; }
+.card .meta a { color: var(--ink); font-weight: 550; }
+
+/* --- Tabellen: auf dem Telefon als Blöcke, nicht als Querscroll --- */
+
+table { width: 100%; border-collapse: collapse; margin: 0 0 1.5em; font-size: .94rem; }
+thead th {
+  text-align: left; font-weight: 650; font-size: .78rem;
+  text-transform: uppercase; letter-spacing: .055em;
+  color: var(--ink-faint);
+  padding: 0 10px 7px 0;
+  border-bottom: 1px solid var(--outline);
+}
+tbody td { padding: 11px 10px 11px 0; border-bottom: 1px solid var(--separator); vertical-align: top; }
+
+@media (max-width: 36rem) {
+  thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  tbody tr {
+    display: block; background: var(--surface);
+    border: 1px solid var(--outline); border-radius: var(--radius-sm);
+    padding: 12px 14px; margin-bottom: 10px;
+  }
+  tbody td { display: block; border: 0; padding: 0 0 6px; }
+  tbody td:last-child { padding-bottom: 0; }
+  tbody td::before {
+    content: attr(data-label);
+    display: block;
+    font-size: .74rem; text-transform: uppercase; letter-spacing: .055em;
+    color: var(--ink-faint); font-weight: 650; margin-bottom: 1px;
+  }
+}
+
+/* --- Dokumentliste auf der Startseite --- */
+
+.docs { display: grid; gap: 10px; margin: 0 0 2em; padding: 0; list-style: none; }
+.docs li { padding: 0; margin: 0; }
+.docs li::before { content: none; }
+.docs a {
+  display: flex; align-items: center; gap: 14px;
+  background: var(--surface);
+  border: 1px solid var(--outline); border-radius: var(--radius);
+  padding: 16px 18px; min-height: 44px;
+  text-decoration: none; color: var(--ink);
+}
+.docs a:hover { border-color: var(--ink-faint); }
+.docs .t { font-weight: 650; display: block; }
+.docs .d { color: var(--ink-2); font-size: .9rem; display: block; margin-top: 1px; }
+.docs .chev { margin-left: auto; color: var(--ink-faint); flex: none; }
+
+/* --- Fuss --- */
+
+footer.foot {
+  border-top: 1px solid var(--outline);
+  margin-top: 2.6em; padding-top: 18px;
+  color: var(--ink-2); font-size: .88rem;
+}
+footer.foot a { color: var(--ink-2); }
+footer.foot p { margin: 0 0 .4em; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* --- Kopf-Variante "plain": kein farbiges Band, zentriert, Trennlinie ---
+   Ryse hat diese Form, mietblick das Band. Eine Seite darf nicht nach der
+   anderen aussehen, nur weil sie denselben Generator benutzt. */
+
+body.plain header.top {
+  background: none; color: var(--ink);
+  padding: 34px 0 0; margin-bottom: 22px;
+}
+body.plain header.top .wrap {
+  text-align: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--outline);
+}
+body.plain .brand { color: var(--ink); font-size: 1.6rem; }
+body.plain .tagline { color: var(--ink-2); opacity: 1; }
+body.plain nav.back a { justify-content: center; }
+body.plain nav.back { text-align: center; }
+body.plain main h1 { text-align: center; }
+body.plain .stamp { display: block; width: fit-content; margin-inline: auto; }
+body.plain footer.foot { text-align: center; }
+
+/* Links tragen eine Unterstreichung, nicht nur eine Farbe. Die Ryse-Seite hatte
+   `text-decoration: none` auf einem Orange mit 2.79:1 — damit war Farbe das
+   einzige Linksignal und zugleich zu schwach (WCAG 1.4.1 und 1.4.3). */
+main a, footer.foot a { text-decoration: underline; }
+.docs a, .brand, .skip { text-decoration: none; }
