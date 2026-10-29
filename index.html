@@ -222,7 +222,7 @@
   img.shot,img.scrolly-shot{filter:brightness(.94);}
 }
   *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
+  html{scroll-behavior:smooth;--header-h:90px;scroll-padding-block-start:calc(var(--header-h) + 1rem)}
   body{font-family:var(--font-body); background:var(--bone); color:var(--text);
     line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x:hidden}
   h1,h2,h3{font-family:var(--font-head); color:var(--ink); font-weight:600; letter-spacing:-.03em; line-height:1.04}
