@@ -1,0 +1,46 @@
+{
+  "paare": [
+    {
+      "name": "Ueberschrift auf Bone",
+      "vorn": "ink",
+      "hinten": "bone",
+      "ziel": 7.0
+    },
+    {
+      "name": "Fliesstext auf Bone",
+      "vorn": "text",
+      "hinten": "bone",
+      "ziel": 7.0
+    },
+    {
+      "name": "Fliesstext auf Karte",
+      "vorn": "text",
+      "hinten": "card",
+      "ziel": 7.0
+    },
+    {
+      "name": "Sekundaertext auf Bone",
+      "vorn": "muted",
+      "hinten": "bone",
+      "ziel": 4.5
+    },
+    {
+      "name": "Creme auf Ink",
+      "vorn": "cream",
+      "hinten": "ink",
+      "ziel": 4.5
+    },
+    {
+      "name": "Markentext auf Bone",
+      "vorn": "primary-text",
+      "hinten": "bone",
+      "ziel": 4.5
+    },
+    {
+      "name": "Icon-Orange auf Bone",
+      "vorn": "primary",
+      "hinten": "bone",
+      "ziel": 3.0
+    }
+  ]
+}

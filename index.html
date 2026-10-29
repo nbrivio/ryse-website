@@ -179,9 +179,9 @@
 
 <style>
   :root{
-    --primary:#EA7920; --deep:#D45A10; --cream:#FFF0E4; --peach:#F5C4A0;
+    --primary:#E0741E;--primary-text:#A6420B; --deep:#D45A10; --cream:#FFF0E4; --peach:#F5C4A0;
     --ink:#15100A; --bone:#FFFCF8; --stone:#FBF2E8; --card:#FFFFFF;
-    --text:#4A3B2D; --muted:#9A8978; --line:rgba(21,16,10,.12);
+    --text:#4A3B2D; --muted:#7B6D60; --line:rgba(21,16,10,.12);
     --maxw:1180px;
     --font-head:'Plus Jakarta Sans',-apple-system,system-ui,sans-serif;
     --font-body:-apple-system,BlinkMacSystemFont,system-ui,'Plus Jakarta Sans','Helvetica Neue',Arial,sans-serif;
@@ -213,7 +213,7 @@
 /* Dark Mode: Legal-Seiten und App unterstützen ihn seit je; die Startseite
    blendete bisher jeden, der nachts aus dem Impressum herüberklickte. */
 @media (prefers-color-scheme: dark){
-  :root{
+  :root{--primary-text:#E0741E;
     --cream:#2A1A0F; --peach:#8A5A33;
     --ink:#F5EDE4; --bone:#120D08; --stone:#1A1209; --card:#1C1510;
     --text:#D8C9BA; --muted:#9A8978; --line:rgba(245,237,228,.14);
@@ -235,7 +235,7 @@
   .label{font-family:var(--font-head); font-weight:600; font-size:.72rem; text-transform:uppercase;
     letter-spacing:.2em; color:var(--muted); display:flex; align-items:center; gap:12px}
   .label::before{content:""; width:26px; height:1px; background:var(--primary); display:inline-block}
-  .idx{font-family:var(--font-head); font-weight:600; font-size:.72rem; letter-spacing:.2em; color:var(--primary)}
+  .idx{font-family:var(--font-head); font-weight:600; font-size:.72rem; letter-spacing:.2em; color:var(--primary-text)}
 
   /* Buttons */
   .btn{display:inline-flex; align-items:center; gap:9px; font-family:var(--font-head); font-weight:600;
@@ -418,7 +418,7 @@
   footer p.about{max-width:30em; font-size:.97rem; line-height:1.75}
   footer h4{font-family:var(--font-head); color:#fff; font-size:.74rem; text-transform:uppercase; letter-spacing:.16em; margin-bottom:18px}
   footer ul{list-style:none; display:grid; gap:11px}
-  footer a:hover{color:var(--primary)}
+  footer a:hover{color:var(--primary-text)}
   .foot-bottom{display:flex; flex-wrap:wrap; gap:10px 24px; justify-content:space-between; padding-top:30px; font-size:.85rem; color:#7A6A5C}
 
   @media (max-width:880px){
