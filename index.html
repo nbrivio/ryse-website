@@ -481,7 +481,55 @@
     .hero-trust{font-size:.64rem}
     .nav .btn{padding:0 13px; font-size:.8rem}
   }
-  @media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
+  /* Vollbild-Hero: Foto ueber die ganze Breite, Text darauf. Die Abdunkelung links und unten ist
+     keine Dekoration, sie sichert den Kontrast; Staerke nach Messung am schlechtesten Pixel. */
+  .hero.hero-full{position:relative; overflow:hidden; background:var(--ink); color:var(--bone); display:grid; align-items:end;
+    min-height:min(90vh,940px); min-height:min(90svh,940px); margin-top:0; padding:calc(var(--header-h) + clamp(56px,7vw,96px)) 0 clamp(40px,5vw,64px)}
+  .hero-bg{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:70% 50%}
+  .hero-full::after{content:""; position:absolute; inset:0; pointer-events:none;
+    background:linear-gradient(90deg,rgba(21,16,10,.94) 0%,rgba(21,16,10,.9) 42%,rgba(21,16,10,.72) 60%,rgba(21,16,10,.28) 78%,rgba(21,16,10,0) 92%),
+    linear-gradient(0deg,rgba(21,16,10,.85) 0%,rgba(21,16,10,.3) 40%,rgba(21,16,10,0) 60%)}
+  .hero-inner{position:relative; z-index:1; width:100%; justify-self:stretch}
+  .hero-full h1{color:var(--bone); max-width:13ch; font-size:clamp(2.4rem,5.6vw,5.4rem)}
+  .hero-full p.lead{color:#E3D6C6; max-width:30em}
+  .hero-full .label{color:#C9B9A6}
+  .hero-full .platform-note{color:#B7A795}
+  .hero-full .link-arrow{color:var(--bone); border-color:rgba(255,252,248,.3)}
+  .hero-full .link-arrow svg{color:var(--primary)}
+  .hero-full .hero-trust{color:#C9B9A6; margin-top:clamp(40px,6vw,72px)}
+  .hero-full .hero-trust b{color:var(--bone)}
+  @media (max-width:880px){.hero.hero-full{min-height:min(92svh,900px); padding:calc(var(--header-h) + 40px) 0 40px}
+    .hero-full .hero-copy{text-align:left}.hero-full .cta,.hero-full .hero-trust{justify-content:flex-start}
+    .hero-bg{object-position:72% 50%}
+    .hero-full::after{background:linear-gradient(0deg,rgba(21,16,10,.95) 0%,rgba(21,16,10,.9) 48%,rgba(21,16,10,.62) 70%,rgba(21,16,10,.2) 88%,rgba(21,16,10,0) 100%)}}
+  /* Kopfzeile ueber dem Foto: hell, bis sie zur Pille wird */
+  header.nav.ueber-foto:not(.scrolled) .top-nav a{color:var(--bone)}
+  header.nav.ueber-foto:not(.scrolled) .top-nav a:hover{background:rgba(255,252,248,.12)}
+  header.nav.ueber-foto:not(.scrolled) .logo{filter:brightness(0) invert(1)}
+  header.nav.ueber-foto:not(.scrolled) .burger{background:rgba(255,252,248,.12); border-color:rgba(255,252,248,.3); color:var(--bone)}
+  /* Auftritt: Kinder gestaffelt, Foto zieht heran */
+  .js .hero-full .hero-copy{opacity:1; transform:none; transition:none}
+  .js .hero-full .hero-copy>*{opacity:0; transform:translateY(22px); transition:opacity 1.1s var(--ease-slow), transform 1.1s var(--ease-slow)}
+  .js .hero-full .hero-copy.in>*{opacity:1; transform:none}
+  .js .hero-full .hero-copy.in>:nth-child(2){transition-delay:.1s}
+  .js .hero-full .hero-copy.in>:nth-child(3){transition-delay:.3s}
+  .js .hero-full .hero-copy.in>:nth-child(4){transition-delay:.42s}
+  .js .hero-full .hero-copy.in>:nth-child(5){transition-delay:.52s}
+  .js .hero-bg{transform:scale(1.06); transition:transform 2.4s var(--ease-slow)}
+  .js .hero-full:has(.hero-copy.in) .hero-bg{transform:none}
+  /* Foto-Band */
+  .photo-band{line-height:0; overflow:hidden; background:var(--ink)}
+  .photo-band img{display:block; width:100%; height:auto; aspect-ratio:21/9; object-fit:cover}
+  .photo-band img.band-mitte{object-position:50% 40%}
+  @media (max-width:880px){.photo-band img{aspect-ratio:16/9}}
+  @supports (animation-timeline: view()){
+    @media (prefers-reduced-motion: no-preference){
+      .photo-band img{animation:schaerfen linear both; animation-timeline:view(); animation-range:entry 0% entry 55%}
+      @keyframes schaerfen{from{filter:blur(14px); transform:scale(1.05)}to{filter:blur(0); transform:none}}
+    }
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}
+    .js .hero-full .hero-copy>*,.js .hero-bg{opacity:1; transform:none}}
   :root{--ease-slow:cubic-bezier(.22,.61,.36,1)}
   .reveal{opacity:0; transform:translateY(18px); transition:opacity 1s var(--ease-slow), transform 1s var(--ease-slow)}
   .reveal.in{opacity:1; transform:none}
@@ -554,10 +602,11 @@
 function pruefen(){if(!w.__animBereit){h.className=h.className.replace(/(^|\s)js(\s|$)/," ");}}
 if(w.addEventListener){w.addEventListener("load",function(){setTimeout(pruefen,800);},false);}
 setTimeout(pruefen,4000);})();</script>
+<link rel="preload" as="image" href="/assets/foto/werkstatt-720.webp" imagesrcset="/assets/foto/werkstatt-720.webp 720w, /assets/foto/werkstatt-1200.webp 1200w, /assets/foto/werkstatt-1600.webp 1600w" imagesizes="100vw" fetchpriority="high">
 </head>
 <body>
 
-<header class="nav" id="nav">
+<header class="nav ueber-foto" id="nav">
   <div class="nav-inner">
     <a href="#top" aria-label="Ryse Startseite"><img class="logo" src="/assets/logo.svg" alt="Ryse" width="63" height="40" fetchpriority="high" decoding="async"></a>
     <nav class="top-nav" aria-label="Hauptnavigation">
@@ -586,36 +635,18 @@ m.addEventListener('click',function(e){if(e.target.tagName==='A')setz(false);});
 <main id="top">
 
 <!-- ============ HERO ============ -->
-<section class="hero">
-  <div class="wrap">
-    <div class="hero-grid">
-      <div class="reveal in">
-        <span class="label">Für Schweizer Kleinunternehmen</span>
-        <h1 class="reveal-lines">Rechnungen,<br>die einfach<br>funktionieren.</h1>
-        <p class="lead">Von der Offerte bis zur bezahlten Rechnung. Inklusive MWST-Abrechnung und Jahresabschluss für deine Treuhand. Ryse nimmt dir den Papierkram ab.</p>
-        <div class="cta">
-          <a class="btn btn-primary" href="https://apps.apple.com/ch/app/ryse-f%C3%BCr-schweizer-kmu/id6760948754">Im App Store laden</a>
-          <a class="link-arrow" href="#features">Funktionen ansehen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        </div>
-        <p class="platform-note">Für iPhone und iPad, ab iOS 17. Android: coming soon.</p>
+<section class="hero hero-full">
+  <img class="hero-bg" src="/assets/foto/werkstatt-720.webp" srcset="/assets/foto/werkstatt-720.webp 720w, /assets/foto/werkstatt-1200.webp 1200w, /assets/foto/werkstatt-1600.webp 1600w" sizes="100vw" width="1600" height="1066" alt="Ein Schreiner wischt am Feierabend Sägemehl von der Werkbank, vorne liegt ein Klemmbrett, durchs Fenster fällt spätes Licht" fetchpriority="high">
+  <div class="wrap hero-inner">
+    <div class="reveal in hero-copy">
+      <span class="label">Für Schweizer Kleinunternehmen</span>
+      <h1 class="reveal-lines">Rechnungen,<br>die einfach<br>funktionieren.</h1>
+      <p class="lead">Von der Offerte bis zur bezahlten Rechnung. Inklusive MWST-Abrechnung und Jahresabschluss für deine Treuhand. Ryse nimmt dir den Papierkram ab.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="https://apps.apple.com/ch/app/ryse-f%C3%BCr-schweizer-kmu/id6760948754">Im App Store laden</a>
+        <a class="link-arrow" href="#features">Funktionen ansehen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
-      <div class="hero-visual reveal in">
-        <div class="parallax">
-        <div class="phone-wrap">
-          <div class="phone">
-            <div class="phone-body">
-              <span class="btn-side btn-action"></span>
-              <span class="btn-side btn-volup"></span>
-              <span class="btn-side btn-voldn"></span>
-              <span class="btn-side btn-power"></span>
-              <div class="phone-screen">
-                <img fetchpriority="high" decoding="async" width="390" height="844" class="shot" src="/assets/screens/home.jpg" alt="Ryse auf dem iPhone: Startbildschirm mit Monatsumsatz und offenen Rechnungen">
-              </div>
-            </div>
-          </div>
-        </div>
-        </div>
-      </div>
+      <p class="platform-note">Für iPhone und iPad, ab iOS 17. Android: coming soon.</p>
     </div>
     <div class="hero-trust reveal in">
       <span><b>Offerte bis Abschluss</b> in einer App</span>
@@ -686,6 +717,8 @@ m.addEventListener('click',function(e){if(e.target.tagName==='A')setz(false);});
 </section>
 
 <!-- ============ SCROLLYTELLING ============ -->
+<div class="photo-band"><img src="/assets/foto/quittungen-720.webp" srcset="/assets/foto/quittungen-720.webp 720w, /assets/foto/quittungen-1200.webp 1200w, /assets/foto/quittungen-1600.webp 1600w" sizes="100vw" width="1600" height="685" alt="Eine Frau sortiert am Küchentisch einen Stapel Quittungen, daneben ein Kaffee und ein umgedrehtes Telefon" loading="lazy" decoding="async"></div>
+
 <section class="scrolly" id="scrolly">
   <div class="wrap scrolly-grid">
     <div class="scrolly-visual">
@@ -748,6 +781,8 @@ m.addEventListener('click',function(e){if(e.target.tagName==='A')setz(false);});
 </section>
 
 <!-- ============ PRICING ============ -->
+<div class="photo-band"><img src="/assets/foto/baecker-720.webp" srcset="/assets/foto/baecker-720.webp 720w, /assets/foto/baecker-1200.webp 1200w, /assets/foto/baecker-1600.webp 1600w" sizes="100vw" width="1600" height="685" alt="Ein Bäcker lädt im Abendlicht Kisten in seinen Lieferwagen, dahinter eine Altstadtgasse mit Tram" loading="lazy" decoding="async"></div>
+
 <section class="pricing" id="preis">
   <div class="wrap">
     <div class="features-head reveal">
@@ -778,6 +813,8 @@ m.addEventListener('click',function(e){if(e.target.tagName==='A')setz(false);});
 </section>
 
 <!-- ============ FAQ ============ -->
+<div class="photo-band"><img src="/assets/foto/treuhand-720.webp" srcset="/assets/foto/treuhand-720.webp 720w, /assets/foto/treuhand-1200.webp 1200w, /assets/foto/treuhand-1600.webp 1600w" sizes="100vw" width="1600" height="1066" class="band-mitte" alt="Eine Treuhänderin sitzt im Winterlicht an ihrem Schreibtisch, die Hand auf einem geschlossenen Ordner, daneben Brille und Tee" loading="lazy" decoding="async"></div>
+
 <section id="fragen">
   <div class="wrap">
     <div class="faq-head reveal">
@@ -810,6 +847,8 @@ m.addEventListener('click',function(e){if(e.target.tagName==='A')setz(false);});
 </section>
 
 <!-- ============ CLOSING CTA ============ -->
+<div class="photo-band"><img src="/assets/foto/regen-720.webp" srcset="/assets/foto/regen-720.webp 720w, /assets/foto/regen-1200.webp 1200w, /assets/foto/regen-1600.webp 1600w" sizes="100vw" width="1600" height="685" alt="Ein Handwerker trägt seinen Werkzeugkoffer über ein regennasses Trottoir, die Stadt spiegelt sich im Boden" loading="lazy" decoding="async"></div>
+
 <section class="closing">
   <div class="wrap inner reveal">
     <h2>Bereit, dir den Papierkram abzunehmen?</h2>
