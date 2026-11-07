@@ -378,12 +378,13 @@
 
   /* Statement band: bright iridescent moment */
   /* Atemraum: eine dunkle Flaeche, ein Satz */
-  .statement{position:relative; text-align:left; padding:clamp(112px,16vw,220px) 0; background:#15100A; color:#FFFCF8}
-  .statement h2{color:#FFFCF8; font-size:clamp(2.2rem,5vw,4.2rem); max-width:16ch; margin:0}
+  .statement{position:relative; text-align:left; padding:clamp(96px,14vw,200px) 0; background:#0B0906; color:#FFFCF8; overflow:hidden}
+  .statement h2{color:#FFFCF8; font-size:clamp(3rem,10.5vw,10.5rem); line-height:.95; letter-spacing:-.045em; max-width:none; margin:0}
+  .statement h2 .akzent{color:var(--primary)}
   .statement .label{color:#B7A795; margin-bottom:30px}
   .statement .label::before{background:var(--primary)}
   .statement p{color:#D8C9BA; max-width:34em; margin:30px 0 0; font-size:1.15rem}
-  @media (prefers-color-scheme: dark){.statement{background:#0B0806; color:#F5EDE4}.statement h2{color:#F5EDE4}}
+
 
   /* Pricing */
   .pricing{text-align:center}
@@ -463,7 +464,7 @@
     .showcase p.sub{font-size:1.02rem}
     .showcase .media{padding:14px}
     .phone-shot{width:min(244px,70%)}
-    .statement h2{font-size:2rem}
+    .statement h2{font-size:clamp(2.6rem,13vw,4rem)}
     .statement p{font-size:1.02rem}
     .price-card{padding:32px 22px}
     .price-amt{font-size:2.6rem}
@@ -476,7 +477,7 @@
   @media (max-width:380px){
     .wrap{padding:0 17px}
     .hero h1{font-size:2rem}
-    .features-head h2,.showcase h2,.statement h2,.closing h2{font-size:1.66rem}
+    .features-head h2,.showcase h2,.closing h2{font-size:1.66rem}
     .price-amt{font-size:2.3rem}
     .hero-trust{font-size:.64rem}
     .nav .btn{padding:0 13px; font-size:.8rem}
@@ -490,8 +491,10 @@
     background:linear-gradient(90deg,rgba(21,16,10,.94) 0%,rgba(21,16,10,.9) 42%,rgba(21,16,10,.72) 60%,rgba(21,16,10,.28) 78%,rgba(21,16,10,0) 92%),
     linear-gradient(0deg,rgba(21,16,10,.85) 0%,rgba(21,16,10,.3) 40%,rgba(21,16,10,0) 60%)}
   .hero-inner{position:relative; z-index:1; width:100%; justify-self:stretch}
-  .hero-full h1{color:var(--foto-ink); max-width:13ch; font-size:clamp(2.4rem,5.6vw,5.4rem)}
-  .hero-full p.lead{color:var(--foto-muted); max-width:30em}
+  .hero-full h1{color:var(--foto-ink); max-width:none; font-size:clamp(3.6rem,11.5vw,11.5rem); line-height:.9; letter-spacing:-.045em; margin:0 0 28px}
+  .hero-pfeil{position:absolute; right:-4vw; bottom:-9vw; width:clamp(200px,30vw,470px); height:auto; z-index:1; pointer-events:none; transform:translateY(40px) rotate(-4deg); opacity:0}
+  .js .hero-full:has(.reveal.in) .hero-pfeil,html:not(.js) .hero-pfeil{opacity:1; transform:none; transition:opacity 1.4s var(--ease-slow) .5s, transform 1.6s var(--ease-slow) .5s}
+  .hero-full p.lead{color:var(--foto-muted); max-width:30em; font-size:1.25rem; margin:0 0 32px}
   .hero-full .label{color:var(--foto-dim)}
   .hero-full .platform-note{color:#B7A795}
   .hero-full .link-arrow{color:var(--foto-ink); border-color:rgba(255,252,248,.3)}
@@ -501,6 +504,9 @@
   @media (max-width:880px){.hero.hero-full{min-height:min(92svh,900px); padding:calc(var(--header-h) + 40px) 0 40px}
     .hero-full .hero-copy{text-align:left}.hero-full .cta,.hero-full .hero-trust{justify-content:flex-start}
     .hero-bg{object-position:72% 50%}
+    .hero-full h1{font-size:clamp(3.2rem,16vw,5.4rem)}
+    .hero-full p.lead{max-width:22em}
+    .hero-pfeil{width:36vw; right:-8vw; bottom:-14vw}
     .hero-full::after{background:linear-gradient(0deg,rgba(21,16,10,.95) 0%,rgba(21,16,10,.9) 48%,rgba(21,16,10,.62) 70%,rgba(21,16,10,.2) 88%,rgba(21,16,10,0) 100%)}}
   /* Kopfzeile ueber dem Foto: hell, bis sie zur Pille wird */
   header.nav.ueber-foto:not(.scrolled) .top-nav a{color:#FFFCF8}
@@ -637,22 +643,14 @@ m.addEventListener('click',function(e){if(e.target.tagName==='A')setz(false);});
 <!-- ============ HERO ============ -->
 <section class="hero hero-full">
   <img class="hero-bg" src="/assets/foto/werkstatt-720.webp" srcset="/assets/foto/werkstatt-720.webp 720w, /assets/foto/werkstatt-1200.webp 1200w, /assets/foto/werkstatt-1600.webp 1600w" sizes="100vw" width="1600" height="1066" alt="Ein Schreiner wischt am Feierabend Sägemehl von der Werkbank, vorne liegt ein Klemmbrett, durchs Fenster fällt spätes Licht" fetchpriority="high">
+  <img class="hero-pfeil" src="/assets/pfeil.svg" alt="" width="113" height="122" aria-hidden="true">
   <div class="wrap hero-inner">
     <div class="reveal in hero-copy">
-      <span class="label">Für Schweizer Kleinunternehmen</span>
-      <h1 class="reveal-lines">Rechnungen,<br>die einfach<br>funktionieren.</h1>
-      <p class="lead">Von der Offerte bis zur bezahlten Rechnung. Inklusive MWST-Abrechnung und Jahresabschluss für deine Treuhand. Ryse nimmt dir den Papierkram ab.</p>
+      <h1 class="reveal-lines">Das Geschäft<br>zuerst.</h1>
+      <p class="lead">Offerte, Rechnung, MWST. Für Schweizer Kleinunternehmen.</p>
       <div class="cta">
         <a class="btn btn-primary" href="https://apps.apple.com/ch/app/ryse-f%C3%BCr-schweizer-kmu/id6760948754">Im App Store laden</a>
-        <a class="link-arrow" href="#features">Ansehen, was sie kann <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
-      <p class="platform-note">Für iPhone und iPad, ab iOS 17. Android: coming soon.</p>
-    </div>
-    <div class="hero-trust reveal in">
-      <span><b>Offerte bis Abschluss</b> in einer App</span>
-      <span><b>MWST &amp; Jahresabschluss</b> inklusive</span>
-      <span><b>Daten in der Schweiz</b> · Schweizer nDSG</span>
-      <span><b>14&nbsp;Tage</b> gratis</span>
     </div>
   </div>
 </section>
@@ -670,47 +668,32 @@ m.addEventListener('click',function(e){if(e.target.tagName==='A')setz(false);});
       <div class="feature reveal">
         <div class="nr">01</div>
         <h3>Angebote</h3>
-        <p>Offerte in unter zwei Minuten: Kunde wählen, Positionen aus dem Katalog, fertig. Ein Tipp macht daraus die Rechnung.</p>
+        <p>Offerte in zwei Minuten. Ein Tipp, und sie ist die Rechnung.</p>
       </div>
       <div class="feature reveal">
         <div class="nr">02</div>
         <h3>Rechnungen</h3>
-        <p>Rechnungen mit deinem Logo: einmalig, wiederkehrend, oder als Zahlungserinnerung, wenn jemand vergisst zu zahlen.</p>
+        <p>Mit deinem Logo. Einmalig, wiederkehrend, oder als Erinnerung.</p>
       </div>
       <div class="feature reveal">
         <div class="nr">03</div>
-        <h3>Swiss QR-Bill</h3>
-        <p>Der Schweizer QR-Einzahlungsschein ist auf jeder Rechnung dabei. Ohne Aufpreis.</p>
+        <h3>QR-Rechnung</h3>
+        <p>Der Schweizer Zahlteil ist auf jeder Rechnung dabei.</p>
       </div>
       <div class="feature reveal">
         <div class="nr">04</div>
-        <h3>Kundenstamm</h3>
-        <p>Alle Kunden und Kontakte an einem Ort. Sofort griffbereit.</p>
+        <h3>MWST &amp; Abschluss</h3>
+        <p>Quartal, Halbjahr, Jahr. Am Ende ein Paket für die Treuhand.</p>
       </div>
       <div class="feature reveal">
         <div class="nr">05</div>
-        <h3>Kalender</h3>
-        <p>Termine, Aufträge und Abwesenheiten im Blick: Geschäft und Alltag.</p>
+        <h3>Auch offline</h3>
+        <p>Kein Empfang auf der Baustelle? Du erfasst weiter.</p>
       </div>
       <div class="feature reveal">
         <div class="nr">06</div>
-        <h3>MWST &amp; Abschluss</h3>
-        <p>MWST-Abrechnung für Quartal, Halbjahr oder Jahr als PDF und CSV. Zum Jahresende ein fertiges Paket für die Treuhand.</p>
-      </div>
-      <div class="feature reveal">
-        <div class="nr">07</div>
-        <h3>Zahlungserinnerung</h3>
-        <p>Offene Rechnung überfällig? Eine Erinnerung als PDF, mit QR-Zahlteil, auf Knopfdruck.</p>
-      </div>
-      <div class="feature reveal">
-        <div class="nr">08</div>
-        <h3>Auch offline</h3>
-        <p>Auf der Baustelle ohne Empfang? Du erfasst weiter. Ryse synchronisiert, sobald du wieder Netz hast.</p>
-      </div>
-      <div class="feature reveal">
-        <div class="nr">09</div>
-        <h3>Finanzübersicht</h3>
-        <p>Einnahmen pro Monat und Jahr, offene Beträge, Transaktionen. Ohne Tabellen-Chaos.</p>
+        <h3>Finanzen</h3>
+        <p>Einnahmen, offene Beträge, Transaktionen. Ohne Tabellen.</p>
       </div>
     </div>
   </div>
@@ -740,7 +723,6 @@ m.addEventListener('click',function(e){if(e.target.tagName==='A')setz(false);});
       <div class="scrolly-step" data-screen="0">
         <div class="label"><span class="idx">01</span> Übersicht</div>
         <h2 class="reveal-lines">Dein Business,<br>auf einen Blick.</h2>
-        <p class="sub">Einnahmen, offene Beträge und anstehende Aufträge. Alles auf dem Home-Screen, sobald du die App öffnest.</p>
         <ul class="checklist">
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l4 4L19 6"/></svg> Einnahmen pro Monat &amp; Jahr</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l4 4L19 6"/></svg> Schnellzugriff auf Angebot, Rechnung, Termin</li>
@@ -749,22 +731,17 @@ m.addEventListener('click',function(e){if(e.target.tagName==='A')setz(false);});
       <div class="scrolly-step" data-screen="1">
         <div class="label"><span class="idx">02</span> Angebot → Rechnung</div>
         <h2 class="reveal-lines">Ein Ablauf,<br>kein Papierchaos.</h2>
-        <p class="sub">Aus der Offerte wird mit einem Tipp die Rechnung. Alles bleibt verknüpft, nachvollziehbar und an einem Ort.</p>
         <ul class="checklist">
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l4 4L19 6"/></svg> Offerte erstellen, senden, umwandeln</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l4 4L19 6"/></svg> Status im Blick: offen, bezahlt, überfällig</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l4 4L19 6"/></svg> Wiederkehrende Rechnungen automatisch</li>
         </ul>
       </div>
       <div class="scrolly-step" data-screen="2">
         <div class="label"><span class="idx">03</span> Finanzen</div>
         <h2 class="reveal-lines">Deine Zahlen,<br>immer im Blick.</h2>
-        <p class="sub">Einnahmen pro Monat und Jahr, offene Beträge und Transaktionen. Plus die MWST-Abrechnung, wenn das Quartal fällig ist.</p>
         <ul class="checklist">
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l4 4L19 6"/></svg> Einnahmen pro Monat &amp; Jahr</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l4 4L19 6"/></svg> Offene Beträge &amp; Transaktionen</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l4 4L19 6"/></svg> MWST-Abrechnung pro Quartal, Halbjahr oder Jahr</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l4 4L19 6"/></svg> Jahresabschluss als fertiges Paket für die Treuhand</li>
         </ul>
       </div>
     </div>
@@ -774,9 +751,7 @@ m.addEventListener('click',function(e){if(e.target.tagName==='A')setz(false);});
 <!-- ============ STATEMENT ============ -->
 <section class="statement">
   <div class="wrap reveal">
-    <span class="label">Ryse</span>
-    <h2 class="reveal-lines">Weniger Papierkram.<br>Mehr Geschäft.</h2>
-    <p>Du machst die Arbeit. Ryse macht den Rest. Von der ersten Offerte bis zum bezahlten Franken.</p>
+    <h2 class="reveal-lines">Weniger Papier.<br><span class="akzent">Mehr Geschäft.</span></h2>
   </div>
 </section>
 
